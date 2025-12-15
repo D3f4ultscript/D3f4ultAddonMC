@@ -1,141 +1,138 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>D3f4ult Addon</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        body {
-            font-family: 'Arial', sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            color: white;
-        }
-        .header {
-            position: absolute;
-            top: 20px;
-            right: 20px;
-        }
-        .discord-btn {
-            width: 50px;
-            height: 50px;
-            background: #5865F2;
-            border: none;
-            border-radius: 50%;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 15px rgba(88, 101, 242, 0.4);
-        }
-        .discord-btn:hover {
-            transform: scale(1.1);
-            box-shadow: 0 6px 20px rgba(88, 101, 242, 0.6);
-        }
-        .discord-icon {
-            width: 28px;
-            height: 28px;
-            background: white;
-            border-radius: 50%;
-            position: relative;
-        }
-        .container {
-            text-align: center;
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(10px);
-            border-radius: 20px;
-            padding: 40px;
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
-        }
-        h1 {
-            font-size: 3em;
-            margin-bottom: 20px;
-            background: linear-gradient(45deg, #fff, #f0f0f0);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-        .version {
-            font-size: 1.2em;
-            color: #ffd700;
-            margin-bottom: 30px;
-            font-weight: bold;
-        }
-        .download-btn {
-            background: linear-gradient(45deg, #ff6b6b, #ff8e8e);
-            color: white;
-            border: none;
-            padding: 15px 40px;
-            font-size: 1.3em;
-            border-radius: 50px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            box-shadow: 0 10px 25px rgba(255, 107, 107, 0.4);
-            margin-bottom: 15px;
-        }
-        .download-btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 15px 35px rgba(255, 107, 107, 0.6);
-        }
-        .status {
-            color: #ff4757;
-            font-size: 1.1em;
-            font-weight: bold;
-            display: none;
-        }
-        @media (max-width: 768px) {
-            h1 { font-size: 2.2em; }
-            .container { padding: 30px 20px; margin: 20px; }
-        }
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>D3f4ult Addon</title>
+  <style>
+    *{margin:0;padding:0;box-sizing:border-box}
+    body{
+      font-family:Arial,sans-serif;
+      background:linear-gradient(135deg,#667eea 0%,#764ba2 100%);
+      min-height:100vh;
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+      justify-content:center;
+      color:#fff;
+      overflow:hidden;
+    }
+    .header{
+      position:absolute;
+      top:20px;
+      right:20px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      width:50px;
+      height:50px;
+    }
+    .discord-icon{
+      width:34px;
+      height:34px;
+      color:#fff;
+      opacity:.95;
+      user-select:none;
+      pointer-events:none;
+      filter:drop-shadow(0 6px 16px rgba(0,0,0,.25));
+    }
+    .container{
+      text-align:center;
+      background:transparent;
+      padding:40px 20px;
+    }
+    h1{
+      font-size:3em;
+      margin-bottom:16px;
+      background:linear-gradient(45deg,#fff,#f0f0f0);
+      -webkit-background-clip:text;
+      -webkit-text-fill-color:transparent;
+      background-clip:text;
+    }
+    .version{
+      font-size:1.15em;
+      color:#fff;
+      margin-bottom:26px;
+      font-weight:700;
+      opacity:.95;
+    }
+    .download-btn{
+      background:linear-gradient(45deg,#ff6b6b,#ff8e8e);
+      color:#fff;
+      border:none;
+      padding:15px 40px;
+      font-size:1.3em;
+      border-radius:50px;
+      cursor:pointer;
+      transition:transform .3s ease, box-shadow .3s ease;
+      box-shadow:0 10px 25px rgba(255,107,107,.4);
+      margin-bottom:14px;
+    }
+    .download-btn:hover{
+      transform:translateY(-3px);
+      box-shadow:0 15px 35px rgba(255,107,107,.6);
+    }
+    .status{
+      color:#ff4757;
+      font-size:1.1em;
+      font-weight:700;
+      opacity:0;
+      transform:translateY(10px);
+      pointer-events:none;
+    }
+    .status.show{
+      animation:fadeIn .25s ease forwards;
+    }
+    .status.hide{
+      animation:fadeOut .35s ease forwards;
+    }
+    @keyframes fadeIn{
+      from{opacity:0;transform:translateY(10px)}
+      to{opacity:1;transform:translateY(0)}
+    }
+    @keyframes fadeOut{
+      from{opacity:1;transform:translateY(0)}
+      to{opacity:0;transform:translateY(10px)}
+    }
+    @media (max-width:768px){
+      h1{font-size:2.2em}
+      .container{padding:30px 20px;margin:20px}
+    }
+  </style>
 </head>
 <body>
-    <div class="header">
-        <button class="discord-btn" onclick="joinDiscord()">
-            <div class="discord-icon"></div>
-        </button>
-    </div>
-    
-    <div class="container">
-        <h1>D3f4ult Addon</h1>
-        <div class="version">1.21.4 #0</div>
-        <button class="download-btn" onclick="showStatus()">
-            Download
-        </button>
-        <div class="status" id="statusMsg">File will be available soon!</div>
-    </div>
+  <div class="header">
+    <svg class="discord-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" aria-hidden="true">
+      <path fill="currentColor" d="M13.545 2.907a13.2 13.2 0 0 0-3.257-1.011.05.05 0 0 0-.052.025c-.141.25-.297.577-.406.833a12.2 12.2 0 0 0-3.658 0 8 8 0 0 0-.412-.833.05.05 0 0 0-.052-.025c-1.125.194-2.22.534-3.257 1.011a.04.04 0 0 0-.021.018C.356 6.024-.213 9.047.066 12.032q.003.022.021.037a13.3 13.3 0 0 0 3.995 2.02.05.05 0 0 0 .056-.019q.463-.63.818-1.329a.05.05 0 0 0-.01-.059l-.018-.011a9 9 0 0 1-1.248-.595.05.05 0 0 1-.02-.066l.015-.019q.127-.095.248-.195a.05.05 0 0 1 .051-.007c2.619 1.196 5.454 1.196 8.041 0a.05.05 0 0 1 .053.007q.121.1.248.195a.05.05 0 0 1-.004.085 8 8 0 0 1-1.249.594.05.05 0 0 0-.03.03.05.05 0 0 0 .003.041c.24.465.515.909.817 1.329a.05.05 0 0 0 .056.019 13.2 13.2 0 0 0 4.001-2.02.05.05 0 0 0 .021-.037c.334-3.451-.559-6.449-2.366-9.106a.03.03 0 0 0-.02-.019m-8.198 7.307c-.789 0-1.438-.724-1.438-1.612s.637-1.613 1.438-1.613c.807 0 1.45.73 1.438 1.613 0 .888-.637 1.612-1.438 1.612m5.316 0c-.788 0-1.438-.724-1.438-1.612s.637-1.613 1.438-1.613c.807 0 1.451.73 1.438 1.613 0 .888-.631 1.612-1.438 1.612"/>
+    </svg>
+  </div>
 
-    <script>
-        function showStatus() {
-            const status = document.getElementById('statusMsg');
-            status.style.display = 'block';
-            status.style.animation = 'fadeIn 0.5s ease';
-        }
+  <div class="container">
+    <h1>D3f4ult Addon</h1>
+    <div class="version">Minecraft: 1.21.4 Build #0</div>
+    <button class="download-btn" id="downloadBtn">Download</button>
+    <div class="status" id="statusMsg">File will be available soon!</div>
+  </div>
 
-        function joinDiscord() {
-            // Discord invite link will be added later
-            console.log('Discord join coming soon');
-        }
-    </script>
+  <script>
+    const status = document.getElementById("statusMsg");
+    const btn = document.getElementById("downloadBtn");
+    let timer = null;
 
-    <style>
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        .status {
-            animation: fadeIn 0.5s ease;
-        }
-    </style>
+    function showStatus() {
+      if (timer) clearTimeout(timer);
+
+      status.classList.remove("hide");
+      status.classList.add("show");
+
+      timer = setTimeout(() => {
+        status.classList.remove("show");
+        status.classList.add("hide");
+      }, 5000);
+    }
+
+    btn.addEventListener("click", showStatus);
+  </script>
 </body>
 </html>
+
