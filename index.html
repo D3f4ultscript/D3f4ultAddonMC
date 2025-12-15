@@ -1,11 +1,141 @@
 <!DOCTYPE html>
-<html lang="de">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hallo Seite</title>
+    <title>D3f4ult Addon</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: white;
+        }
+        .header {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+        }
+        .discord-btn {
+            width: 50px;
+            height: 50px;
+            background: #5865F2;
+            border: none;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(88, 101, 242, 0.4);
+        }
+        .discord-btn:hover {
+            transform: scale(1.1);
+            box-shadow: 0 6px 20px rgba(88, 101, 242, 0.6);
+        }
+        .discord-icon {
+            width: 28px;
+            height: 28px;
+            background: white;
+            border-radius: 50%;
+            position: relative;
+        }
+        .container {
+            text-align: center;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+        }
+        h1 {
+            font-size: 3em;
+            margin-bottom: 20px;
+            background: linear-gradient(45deg, #fff, #f0f0f0);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .version {
+            font-size: 1.2em;
+            color: #ffd700;
+            margin-bottom: 30px;
+            font-weight: bold;
+        }
+        .download-btn {
+            background: linear-gradient(45deg, #ff6b6b, #ff8e8e);
+            color: white;
+            border: none;
+            padding: 15px 40px;
+            font-size: 1.3em;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 25px rgba(255, 107, 107, 0.4);
+            margin-bottom: 15px;
+        }
+        .download-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 35px rgba(255, 107, 107, 0.6);
+        }
+        .status {
+            color: #ff4757;
+            font-size: 1.1em;
+            font-weight: bold;
+            display: none;
+        }
+        @media (max-width: 768px) {
+            h1 { font-size: 2.2em; }
+            .container { padding: 30px 20px; margin: 20px; }
+        }
+    </style>
 </head>
 <body>
-    <h1>Hallo!</h1>
+    <div class="header">
+        <button class="discord-btn" onclick="joinDiscord()">
+            <div class="discord-icon"></div>
+        </button>
+    </div>
+    
+    <div class="container">
+        <h1>D3f4ult Addon</h1>
+        <div class="version">1.21.4 #0</div>
+        <button class="download-btn" onclick="showStatus()">
+            Download
+        </button>
+        <div class="status" id="statusMsg">File will be available soon!</div>
+    </div>
+
+    <script>
+        function showStatus() {
+            const status = document.getElementById('statusMsg');
+            status.style.display = 'block';
+            status.style.animation = 'fadeIn 0.5s ease';
+        }
+
+        function joinDiscord() {
+            // Discord invite link will be added later
+            console.log('Discord join coming soon');
+        }
+    </script>
+
+    <style>
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .status {
+            animation: fadeIn 0.5s ease;
+        }
+    </style>
 </body>
 </html>
