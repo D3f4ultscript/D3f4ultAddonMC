@@ -115,7 +115,7 @@
   <div class="container">
     <h1>D3f4ult Addon</h1>
     <div class="version">Minecraft: 1.21.4 / Build #0</div>
-    <button class="download-btn" id="downloadBtn">Download</button>
+    <a class="download-btn" href="https://github.com/D3f4ultscript/D3f4ult-Addon/releases/download/D3f4ult/D3f4ult.Addon.txt" target="_blank" rel="noopener noreferrer" id="downloadBtn">Download</a>
     <div class="status" id="statusMsg">File will be available soon!</div>
   </div>
 
@@ -134,8 +134,13 @@
       }, 5000);
     }
 
-    btn.addEventListener("click", showStatus);
+    btn.addEventListener("click", (e) => {
+      e.preventDefault();
+      showStatus();
+      setTimeout(() => {
+        window.open(btn.href, '_blank', 'noopener,noreferrer');
+      }, 250);
+    });
   </script>
 </body>
 </html>
-
