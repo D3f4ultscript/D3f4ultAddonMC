@@ -80,23 +80,13 @@
       transition:transform .3s ease, box-shadow .3s ease;
       box-shadow:0 10px 25px rgba(255,107,107,.4);
       margin-bottom:14px;
+      display:inline-block;
+      text-decoration:none;
     }
     .download-btn:hover{
       transform:translateY(-3px);
       box-shadow:0 15px 35px rgba(255,107,107,.6);
     }
-    .status{
-      color:#ff4757;
-      font-size:1.1em;
-      font-weight:700;
-      opacity:0;
-      transform:translateY(10px);
-      pointer-events:none;
-    }
-    .status.show{animation:fadeIn .25s ease forwards}
-    .status.hide{animation:fadeOut .35s ease forwards}
-    @keyframes fadeIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
-    @keyframes fadeOut{from{opacity:1;transform:translateY(0)}to{opacity:0;transform:translateY(10px)}}
     @media (max-width:768px){
       h1{font-size:2.2em}
       .container{padding:30px 20px;margin:20px}
@@ -114,33 +104,8 @@
 
   <div class="container">
     <h1>D3f4ult Addon</h1>
-    <div class="version">Minecraft: 1.21.4 / Build #0</div>
-    <a class="download-btn" href="https://github.com/D3f4ultscript/D3f4ult-Addon/releases/download/D3f4ult/D3f4ult.Addon.txt" target="_blank" rel="noopener noreferrer" id="downloadBtn">Download</a>
-    <div class="status" id="statusMsg">File will be available soon!</div>
+    <div class="version">Minecraft: 1.21.4 / Build #1</div>
+    <a class="download-btn" href="https://github.com/D3f4ultscript/D3f4ult-Addon/releases/download/D3f4ult/D3f4ult.Addon.txt" target="_blank" rel="noopener noreferrer">Download</a>
   </div>
-
-  <script>
-    const status = document.getElementById("statusMsg");
-    const btn = document.getElementById("downloadBtn");
-    let timer = null;
-
-    function showStatus() {
-      if (timer) clearTimeout(timer);
-      status.classList.remove("hide");
-      status.classList.add("show");
-      timer = setTimeout(() => {
-        status.classList.remove("show");
-        status.classList.add("hide");
-      }, 5000);
-    }
-
-    btn.addEventListener("click", (e) => {
-      e.preventDefault();
-      showStatus();
-      setTimeout(() => {
-        window.open(btn.href, '_blank', 'noopener,noreferrer');
-      }, 250);
-    });
-  </script>
 </body>
 </html>
